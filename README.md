@@ -3,7 +3,7 @@
 ## User Story
 
 ```
-As a movie lover who wants to find a movie with a specific actor,
+As A movie lover who wants to find a movie with a specific actor,
 I WANT to find movies with a specific actor on their respective streaming services
 So THAT I can find where to enjoy my movie
 ```
