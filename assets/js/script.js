@@ -67,3 +67,10 @@ window.addEventListener('load', function() {
    // todo: call functions inside lambda function
 })
 
+
+bulmaCarousel.attach('#carousel-demo', {
+    slidesToScroll: 1,
+    slidesToShow: 2
+});
+
+
