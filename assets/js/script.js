@@ -2,6 +2,7 @@
 const firstKey = '';
 const secondKey = '';
 // sets global variables
+let enumeratorValue = 0;
 let globalResponse = [];
 let globalInputVal = [];
 let globalStorageEl = [];
@@ -10,20 +11,20 @@ let globalStorageTxt = [];
 
 // todo: set variables with element references
 let inputEl = document.querySelector('.input');
+let formEl = document.getElementById('form-el');
 
 // todo: set fetch functions
 
 // todo: set event listeners
 async function initSearch(searchEvent) {
 	console.log('initSearch()');
-   debugger;
 	searchEvent.preventDefault();
 	// first, get the value of the input text
 	let searchString = inputEl.value.trim();
 	// then, push it into the global array
 	globalInputVal.push(searchString);
 	console.log('globalInputVal:', globalInputVal);
-   debugger;
+   console.log('globalInputVal[0]:', globalInputVal[0]);
 	// next, call the fetch function
 	if (searchString) {
 		await fetchActorMovies(searchString);
@@ -34,31 +35,30 @@ async function initSearch(searchEvent) {
 	} else {
 		alert('!searchString');
 	}
+   // then, set the local storage
+   setLocalStorage();
 }
 
 // test: this is a test function
 async function fetchActorMovies(searchString) {
    console.log('fetchActorMovies()');
-   debugger;
 }
 
 // todo: set local storage
 function setLocalStorage() {
 	console.log('setLocalStorage()');
-	let conditionalValue = globalStorageEl.length;
-   debugger;
-	for (let i = 0; i < conditionalValue; i++) {
-		// sets an event listener to the search button
-		globalStorageEl[i].addEventListener('click', function () {
-			// sets the current index to retrieve the text area value
-			let localStorageTxtValue = globalStorageTxt.value;
-			console.log('localStorageTxtValue:', localStorageTxtValue);
-			// sets the value from above into local storage
-			localStorage.setItem(globalStorageEl, localStorageTxtValue);
-		});
-	}
+	// sets the current index to retrieve the text area value
+   globalStorageEl[enumeratorValue] = document.createElement('span');
+   globalStorageEl[enumeratorValue].textContent = globalInputVal[enumeratorValue];
+   document.body.appendChild(globalStorageEl[enumeratorValue]);
+   let localStorageTxtValue = JSON.stringify(globalInputVal[enumeratorValue]);
+   console.log('localStorageTxtValue:', localStorageTxtValue);
+   // sets the value from above into local storage
+   localStorage.setItem(globalStorageEl, localStorageTxtValue);
+   enumeratorValue++;
 }
 
+// todo: finish this method
 function getLocalStorage() {
 	console.log('getLocalStorage()');
 	let conditionalValue = globalStorageEl.length;
@@ -70,7 +70,7 @@ function getLocalStorage() {
 }
 
 // todo: call functions
-document.addEventListener('load', function () {
+window.addEventListener('load', function () {
 	// todo: call functions inside lambda function
-	setLocalStorage();
+	formEl.addEventListener('submit', initSearch);
 });
