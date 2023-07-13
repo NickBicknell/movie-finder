@@ -5,28 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="~bulma-carousel/dist/css/bulma-carousel.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Movie Finder</title>
 </head>
 
 <body>
     <div class="container.is-fullhd">
-        <div class="columns is-centered has-background-dark py-4">
+        <div class="columns is-centered has-background-dark py-4 is-flex">
             <h1 class="title is-size-1 has-text-white py-3">Movie Finder</h1>
         </div>
-        <div class="columns is-centered">
+        <div class="columns is-centered is-flex">
             <h3 class="is-size-3 mt-6">Search for an Actor</h3>
         </div>
-        <div class="columns is-centered">
+        <div class="columns is-centered is-flex">
             <div class="column is-one-fifth">
                 <input class="input is-rounded is-primary" id="actorSearch" type="text" placeholder="Johnny Depp">
             </div>
         </div>
     </div>
+    <section class="section">
+        <div class="container">
+            <!-- Start Carousel -->
+            <div id="carousel-demo" class="carousel">
+                <div class="item-1">
+                    <!-- Slide Content -->
+                    <!-- link to movie -->
+                    <a id="movie-link" href="https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TKZQFJC"> <!-- Could anchor link to watch here -->
+                        <section class="section">
+                            <div class="container">
+                                <div class="columns is-centered">
+                                    <div class="column is-one-third">
+                                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y"
+                                            style="background-image: url('https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359814_so.jpg');">
+                                            <div class="card-content has-no-rounded is-duration-300 pt-24">
+                                                <div class="content">
+                                                    <div class="title-transform-y is-duration-300 mb-5">
+                                                        <!-- Movie Title -->
+                                                        <h3 id="movie-title" class="has-text-white-bis">Spider-Man: Far
+                                                            From Home</h3>
+                                                        <div class="underline-br"></div>
+                                                    </div>
+                                                    <div
+                                                        class="text-motion has-text-white-bis transform is-duration-300 hover-translate-y">
+                                                        <!-- Movie Desc -->
+                                                        <p id="movie-desc" class="is-size-6">Following the events of
+                                                            Avengers: Endgame
+                                                            (2019), Spider-Man must step up to take on new threats in a
+                                                            world that has changed forever.</p>
+                                                            <!-- Streaming Platform -->
+                                                        <p id="streaming-platform" class="is-size-6 is-underlined">Watch
+                                                            now on Amazon Prime
+                                                            Video</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </a>
+                </div>
+                <div class="item-2">
+                    <!-- Slide Content -->
+                </div>
+                <div class="item-3">
+                    <!-- Slide Content -->
+                </div>
+            </div>
+            <!-- End Carousel -->
+        </div>
+    </section>
 
 
 
 
+    <script src="~bulma-carousel/dist/js/bulma-carousel.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
