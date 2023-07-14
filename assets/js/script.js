@@ -162,6 +162,8 @@ window.addEventListener("load", function () {
   // adds the carousel to the DOM
   bulmaCarousel.attach("#carousel-demo", {
     slidesToScroll: 1,
+
     slidesToShow: 1,
   });
 });
+
