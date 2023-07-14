@@ -1,16 +1,16 @@
 // todo: set the api keys to variables
-const apiKey = 'e7c2031dffmsha123315849343c2p1ba5fdjsn2ad30982319f';
+var apiKey = 'e7c2031dffmsha123315849343c2p1ba5fdjsn2ad30982319f';
 // sets global variables
-let enumeratorValue = 0;
-let globalResponse = [];
-let globalInputVal = [];
-let globalStorageEl = [];
-let globalStorageVal = [];
-let globalStorageTxt = [];
+var enumeratorValue = 0;
+var globalResponse = [];
+var globalInputVal = [];
+var globalStorageEl = [];
+var globalStorageVal = [];
+var globalStorageTxt = [];
 
 // todo: set variables with element references
-let inputEl = document.querySelector('.input');
-let formEl = document.getElementById('form-el');
+var inputEl = document.querySelector('.input');
+var formEl = document.getElementById('form-el');
 
 // info: testing variables
 var actor = "ryan%20reynolds";
@@ -120,7 +120,7 @@ window.addEventListener('load', function () {
    // adds the carousel to the DOM
    bulmaCarousel.attach('#carousel-demo', {
       slidesToScroll: 1,
-      slidesToShow: 2
+      slidesToShow: 1
   });
 });
 
