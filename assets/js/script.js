@@ -17,9 +17,9 @@ var formEl = document.getElementById("form-el");
 // var title = "summer%20catch";
 
 // todo: set fetch functions, completed
-//  Fetch Request to get Titles based off Actors Name
 // var url = "https://actor-movie-api1.p.rapidapi.com/getid/" + actor + "?apiKey=62ffac58c57333a136053150eaa1b587";
 
+//  Fetch Request to get Titles based off Actors Name
 var fetchActorMovies = async function (actorSearch) {
   // var url = "https://actor-movie-api1.p.rapidapi.com/getid/Tom%20Holland?apiKey=62ffac58c57333a136053150eaa1b587";
   var url = "https://actor-movie-api1.p.rapidapi.com/getid/" + encodeURI(actorSearch) + "?apiKey=62ffac58c57333a136053150eaa1b587";
@@ -34,6 +34,7 @@ var fetchActorMovies = async function (actorSearch) {
     const response = await fetch(url, options);
     const movieResults = await response.json();
     console.log(movieResults);
+    // Sorts movies by going through each object; grabbing popularity key; and comparing values
     movieResults.sort((a, b) => {
       if (a.popularity > b.popularity) {
         return -1;
@@ -43,15 +44,21 @@ var fetchActorMovies = async function (actorSearch) {
       }
       return 0;
     });
+    // Takes the Top 10 Movies from output of MovieResults.Sort
     const popularMovies = movieResults.slice(0, 10);
     console.log(popularMovies);
+    // Creates an empty array that will store all promises
     const movieTitleFetches = [];
+    // Creates a function that for each movie in popular movies; pushes promises from fetStreamingServices each object.title
     popularMovies.forEach((movie) => {
       movieTitleFetches.push(fetchStreamingServicesBatch(movie.title));
     });
+    // Once all promises in movieTitleFetches are resolved. passes that into Movie Stream Responses
     const moviesStreamResponses = await Promise.all(movieTitleFetches);
+    // creates a new array populated with the results from moviestram responses and covnerting into JSON format
     const moviesStreamData = await Promise.all(moviesStreamResponses.map((response) => response.json()));
     console.log(moviesStreamData);
+    //removes the first element from MoviesArray and returns the removed element.
     const moviesStreamCardData = moviesStreamData.map((moviesArray) => moviesArray.result.shift());
     console.log(moviesStreamCardData);
   } catch (error) {
