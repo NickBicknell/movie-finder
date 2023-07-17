@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Movie Finder</title>
+    <script defer src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script defer src="./assets/js/script.js"></script>
 </head>
 
-<body>
+<body class="has-background-grey-lighter px-3">
     <div class="container.is-fullhd">
         <div class="columns is-centered has-background-dark py-4 is-flex">
             <h1 class="title is-size-1 has-text-white py-3">Movie Finder</h1>
@@ -18,11 +20,11 @@
         <div class="columns is-centered is-flex">
             <h3 class="is-size-3 mt-6">Search for an Actor</h3>
         </div>
-        <div class="columns is-centered is-flex">
-            <div class="column is-one-fifth">
+        <form id="form-el" class="columns is-centered">
+            <div class="column search-width">
                 <input class="input is-rounded is-primary" id="actorSearch" type="text" placeholder="Johnny Depp">
             </div>
-        </div>
+        </form>
     </div>
     <section class="section">
         <div class="container">
@@ -32,28 +34,27 @@
                     <section class="section">
                         <div class="container">
                             <div class="columns is-centered">
-                                <div class="column">
+                                <div class="column card-width">
                                     <a id="movie-link"
                                         href="https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TKZQFJC">
-                                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y"
-                                            style="background-image: url('https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359814_so.jpg');">
+                                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y">
                                             <div class="card-content has-no-rounded is-duration-300 pt-24">
                                                 <div class="content">
                                                     <div class="title-transform-y is-duration-300 mb-5">
                                                         <!-- Movie Title -->
-                                                        <h3 id="movie-title" class="has-text-white-bis">Spider-Man: Far
+                                                        <h3 id="movie-title" class="has-text-white-bis fs-title is-inline pt-2 pl-2 pb-2 mb-3">Spider-Man: Far
                                                             From Home</h3>
                                                         <div class="underline-br"></div>
                                                     </div>
                                                     <div
                                                         class="text-motion has-text-white-bis transform is-duration-300 hover-translate-y">
                                                         <!-- Movie Desc -->
-                                                        <p id="movie-desc" class="is-size-6">Following the events of
+                                                        <p id="movie-desc" class="ml-2 is-size-6">Following the events of
                                                             Avengers: Endgame
                                                             (2019), Spider-Man must step up to take on new threats in a
                                                             world that has changed forever.</p>
                                                         <!-- Streaming Platform -->
-                                                        <p id="streaming-platform" class="is-size-6 is-underlined">Watch
+                                                        <p id="streaming-platform" class="ml-2 is-size-6 is-underlined mb-2">Watch
                                                             now on Amazon Prime
                                                             Video</p>
                                                     </div>
@@ -71,26 +72,25 @@
                     <section class="section">
                         <div class="container">
                             <div class="columns is-centered">
-                                <div class="column ">
-                                    <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y"
-                                        style="background-image: url('https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359814_so.jpg');">
+                                <div class="column card-width">
+                                    <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y">
                                         <div class="card-content has-no-rounded is-duration-300 pt-24">
                                             <div class="content">
                                                 <div class="title-transform-y is-duration-300 mb-5">
                                                     <!-- Movie Title -->
-                                                    <h3 id="movie-title" class="has-text-white-bis">Spider-Man: Far
+                                                    <h3 id="movie-title" class="has-text-white-bis fs-title is-inline pt-2 pr-1 pl-2 pb-2 mb-3">Spider-Man: Far
                                                         From Home</h3>
                                                     <div class="underline-br"></div>
                                                 </div>
                                                 <div
                                                     class="text-motion has-text-white-bis transform is-duration-300 hover-translate-y">
                                                     <!-- Movie Desc -->
-                                                    <p id="movie-desc" class="is-size-6">Following the events of
+                                                    <p id="movie-desc" class="ml-2 is-size-6">Following the events of
                                                         Avengers: Endgame
                                                         (2019), Spider-Man must step up to take on new threats in a
                                                         world that has changed forever.</p>
                                                     <!-- Streaming Platform -->
-                                                    <p id="streaming-platform" class="is-size-6 is-underlined">Watch
+                                                    <p id="streaming-platform" class="ml-2 is-size-6 is-underlined mb-2">Watch
                                                         now on Amazon Prime
                                                         Video</p>
                                                 </div>
@@ -106,28 +106,27 @@
                     <section class="section">
                         <div class="container">
                             <div class="columns is-centered">
-                                <div class="column">
+                                <div class="column card-width">
                                     <a id="movie-link"
                                         href="https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TKZQFJC">
-                                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y"
-                                            style="background-image: url('https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359814_so.jpg');">
+                                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y">
                                             <div class="card-content has-no-rounded is-duration-300 pt-24">
                                                 <div class="content">
                                                     <div class="title-transform-y is-duration-300 mb-5">
                                                         <!-- Movie Title -->
-                                                        <h3 id="movie-title" class="has-text-white-bis">Spider-Man: Far
+                                                        <h3 id="movie-title" class="has-text-white-bis fs-title is-inline pt-2 pr-1 pl-2 pb-2 mb-3">Spider-Man: Far
                                                             From Home</h3>
                                                         <div class="underline-br"></div>
                                                     </div>
                                                     <div
                                                         class="text-motion has-text-white-bis transform is-duration-300 hover-translate-y">
                                                         <!-- Movie Desc -->
-                                                        <p id="movie-desc" class="is-size-6">Following the events of
+                                                        <p id="movie-desc" class="ml-2 is-size-6">Following the events of
                                                             Avengers: Endgame
                                                             (2019), Spider-Man must step up to take on new threats in a
                                                             world that has changed forever.</p>
                                                         <!-- Streaming Platform -->
-                                                        <p id="streaming-platform" class="is-size-6 is-underlined">Watch
+                                                        <p id="streaming-platform" class="ml-2 is-size-6 is-underlined mb-2">Watch
                                                             now on Amazon Prime
                                                             Video</p>
                                                     </div>
@@ -144,28 +143,27 @@
                     <section class="section">
                         <div class="container">
                             <div class="columns is-centered">
-                                <div class="column">
+                                <div class="column card-width">
                                     <a id="movie-link"
                                         href="https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TKZQFJC">
-                                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y"
-                                            style="background-image: url('https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359814_so.jpg');">
+                                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y">
                                             <div class="card-content has-no-rounded is-duration-300 pt-24">
                                                 <div class="content">
                                                     <div class="title-transform-y is-duration-300 mb-5">
                                                         <!-- Movie Title -->
-                                                        <h3 id="movie-title" class="has-text-white-bis">Spider-Man: Far
+                                                        <h3 id="movie-title" class="has-text-white-bis fs-title is-inline pt-2 pr-1 pl-2 pb-2 mb-3">Spider-Man: Far
                                                             From Home</h3>
                                                         <div class="underline-br"></div>
                                                     </div>
                                                     <div
                                                         class="text-motion has-text-white-bis transform is-duration-300 hover-translate-y">
                                                         <!-- Movie Desc -->
-                                                        <p id="movie-desc" class="is-size-6">Following the events of
+                                                        <p id="movie-desc" class="ml-2 is-size-6">Following the events of
                                                             Avengers: Endgame
                                                             (2019), Spider-Man must step up to take on new threats in a
                                                             world that has changed forever.</p>
                                                         <!-- Streaming Platform -->
-                                                        <p id="streaming-platform" class="is-size-6 is-underlined">Watch
+                                                        <p id="streaming-platform" class="ml-2 is-size-6 is-underlined mb-2">Watch
                                                             now on Amazon Prime
                                                             Video</p>
                                                     </div>
