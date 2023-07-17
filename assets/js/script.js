@@ -166,4 +166,3 @@ window.addEventListener("load", function () {
     slidesToShow: 1,
   });
 });
-
