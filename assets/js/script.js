@@ -61,6 +61,7 @@ var fetchActorMovies = async function (actorSearch) {
     //removes the first element from MoviesArray and returns the removed element.
     const moviesStreamCardData = moviesStreamData.map((moviesArray) => moviesArray.result.shift());
     console.log(moviesStreamCardData);
+    populateCard(moviesStreamCardData, actorSearch);
   } catch (error) {
     console.error(error);
   }
@@ -155,15 +156,84 @@ function getLocalStorage() {
   }
 }
 
+function destroyCarousel() {
+  var carousels = bulmaCarousel.attach("#carousel-demo", {
+    slidesToScroll: 1,
+    slidesToShow: 1,
+  });
+  console.log("CAROUSELS", carousels[0]);
+  // carousels[0].destroy();
+}
+
+function initCarousel(id) {
+  var carouselId = id || "carousel-demo";
+  console.log("INIT CAROUSEL", carouselId);
+  bulmaCarousel.attach(`#${carouselId}`, {
+    slidesToScroll: 1,
+    slidesToShow: 1,
+  });
+}
+
 // todo: call functions
 window.addEventListener("load", function () {
   // todo: call functions inside lambda function
   formEl.addEventListener("submit", initSearch);
   // adds the carousel to the DOM
-  bulmaCarousel.attach("#carousel-demo", {
-    slidesToScroll: 1,
-
-    slidesToShow: 1,
-  });
+  initCarousel();
 });
 
+var populateCard = function (moviesStreamCardData, actor) {
+  console.log("Populate Card", moviesStreamCardData);
+  // destroyCarousel();
+  var newId = moviesStreamCardData[0].tmdbId;
+  var carouselId = `${actor}_${newId}`.replaceAll(" ", "_");
+  var elNewCarousel = $(`<div class='carousel' id='${carouselId}'></div>`);
+  $(".carousel-container").empty().append(elNewCarousel);
+  $("#carousel-demo").remove();
+
+  for (i = 0; i < moviesStreamCardData.length; i++) {
+    var movieTitle = moviesStreamCardData[i].title;
+    var movieOverview = moviesStreamCardData[i].overview;
+    var moviePoster = moviesStreamCardData[i].posterURLs.original;
+
+    var appendCard = `<div class="item-${i}">
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column card-width">
+                    <a id="movie-link"
+                        href="https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TKZQFJC">
+                        <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y"
+                        style="background-image: url('${moviePoster}')">
+                            <div class="card-content has-no-rounded is-duration-300 pt-24">
+                                <div class="content">
+                                    <div class="title-transform-y is-duration-300 mb-5">
+                                        <!-- Movie Title -->
+                                        <h3 id="movie-title" class="has-text-white-bis fs-title is-inline pt-2 pl-2 pb-2 mb-3">${movieTitle}</h3>
+                                        <div class="underline-br"></div>
+                                    </div>
+                                    <div
+                                        class="text-motion has-text-white-bis transform is-duration-300 hover-translate-y">
+                                        <!-- Movie Desc -->
+                                        <p id="movie-desc" class="ml-2 is-size-6">${movieOverview}.</p>
+                                        <!-- Streaming Platform -->
+                                        <p id="streaming-platform" class="ml-2 is-size-6 is-underlined mb-2">Watch
+                                            now on Amazon Prime
+                                            Video</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>`;
+
+    elNewCarousel.append(appendCard);
+  }
+
+  // repopulate carousel
+  initCarousel(carouselId);
+};

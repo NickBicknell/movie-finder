@@ -101,7 +101,7 @@ body {
 }
 
 .card {
-  background-image: url('https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359814_so.jpg');
+  /* background-image: url('https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6359/6359814_so.jpg'); */
   background-size: cover;
   background-position: center top;
 }
