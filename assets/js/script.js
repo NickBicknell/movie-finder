@@ -145,6 +145,8 @@ function setLocalStorage() {
   enumeratorValue++;
 }
 
+var historyEl = document.getElementById("history");
+
 // todo: finish this method
 function getLocalStorage() {
   console.log("getLocalStorage()");
@@ -153,6 +155,7 @@ function getLocalStorage() {
   for (var i = 0; i < conditionalValue; i++) {
     globalStorageTxt[i] = localStorage.getItem(i);
     globalStorageEl[i].textContent = globalStorageTxt[i];
+
   }
 }
 
