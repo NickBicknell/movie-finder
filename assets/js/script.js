@@ -195,6 +195,10 @@ var populateCard = function (moviesStreamCardData, actor) {
     var movieTitle = moviesStreamCardData[i].title;
     var movieOverview = moviesStreamCardData[i].overview;
     var moviePoster = moviesStreamCardData[i].posterURLs.original;
+    var streamingPlatform = Object.keys(moviesStreamCardData[i].streamingInfo.us)[0].toUpperCase();
+    console.log("Streaming Platform: ", Object.keys(moviesStreamCardData[i].streamingInfo.us)[0].toUpperCase());
+    var streamingPlatformLink = moviesStreamCardData[i].streamingInfo.us[Object.keys(moviesStreamCardData[i].streamingInfo.us)[0]][0].link;
+    console.log("Link: ", moviesStreamCardData[i].streamingInfo.us[Object.keys(moviesStreamCardData[i].streamingInfo.us)[0]][0].link);
 
     var appendCard = `<div class="item-${i}">
     <section class="section">
@@ -202,7 +206,7 @@ var populateCard = function (moviesStreamCardData, actor) {
             <div class="columns is-centered">
                 <div class="column card-width">
                     <a id="movie-link"
-                        href="https://www.amazon.com/Spider-Man-Far-Home-Tom-Holland/dp/B07TKZQFJC">
+                        href="${streamingPlatformLink}">
                         <div class="card has-no-rounded is-bg-cover is-cursor-pointer transform is-duration-300 hover-translate-y"
                         style="background-image: url('${moviePoster}')">
                             <div class="card-content has-no-rounded is-duration-300 pt-24">
@@ -215,11 +219,9 @@ var populateCard = function (moviesStreamCardData, actor) {
                                     <div
                                         class="text-motion has-text-white-bis transform is-duration-300 hover-translate-y">
                                         <!-- Movie Desc -->
-                                        <p id="movie-desc" class="ml-2 is-size-6">${movieOverview}.</p>
+                                        <p id="movie-desc" class="ml-2 is-size-6">${movieOverview}</p>
                                         <!-- Streaming Platform -->
-                                        <p id="streaming-platform" class="ml-2 is-size-6 is-underlined mb-2">Watch
-                                            now on Amazon Prime
-                                            Video</p>
+                                        <p id="streaming-platform" class="ml-2 is-size-6 is-underlined mb-2">Watch now on ${streamingPlatform}</p>
                                     </div>
                                 </div>
                             </div>
