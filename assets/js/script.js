@@ -13,13 +13,6 @@ var movieResult = "";
 var inputEl = document.querySelector(".input");
 var formEl = document.getElementById("form-el");
 
-// info: testing variables
-// var actor = "ryan%20reynolds";
-// var title = "summer%20catch";
-
-// todo: set fetch functions, completed
-// var url = "https://actor-movie-api1.p.rapidapi.com/getid/" + actor + "?apiKey=62ffac58c57333a136053150eaa1b587";
-
 //  Fetch Request to get Titles based off Actors Name
 var fetchActorMovies = async function (actorSearch) {
   // var url = "https://actor-movie-api1.p.rapidapi.com/getid/Tom%20Holland?apiKey=62ffac58c57333a136053150eaa1b587";
@@ -108,7 +101,6 @@ var fetchStreamingServicesBatch = function (titleSearch) {
 
 // todo: set event listeners
 
-
 async function initSearch(searchEvent) {
   console.log("initSearch()");
   searchEvent.preventDefault();
@@ -131,59 +123,31 @@ async function initSearch(searchEvent) {
     alert("!searchString");
   }
   // then, set the local storage
-  // debugger;
-  // setLocalStorage();
-  // getLocalStorage();
+
   previousSearchItems.push(searchString);
   setLocalItems(previousSearchItems);
   getLocalItems();
 }
 
-
+//function to save items in local storage in string array
 function setLocalItems(items) {
   localStorage.setItem("previousSearches", JSON.stringify(items));
-};
-
-// function setLocalItems(items) {
-//   localStorage.setItem("previousSearches", JSON.stringify(items));
-// };
-
-// function getLocalItems() {
-//   historyEl.innerHTML = '';
-//   const lsItems = localStorage.getItem("previousSearches");
-//   if (localStorage.getItem("previousSearches")) {
-//     console.log("This search is in local storage")
-//     previousSearchItems = JSON.parse(lsItems) || [];
-//     // const startingIndex = previousSearchItems.length - 3;
-//     const maxThree = previousSearchItems.slice(-3);
-//     maxThree.forEach(item => {
-//       const button = document.createElement("span");
-//       button.textContent = item;
-//       button.classList.add("button", "is-link", "mx-2");
-//       historyEl.appendChild(button);
-//     });
-//   } else {
-//     console.log("This search is not in local storage")
-  
-//   }
-  
-// };
+}
 
 function getLocalItems() {
-  historyEl.innerHTML = '';
+  historyEl.innerHTML = "";
   const lsItems = localStorage.getItem("previousSearches");
   previousSearchItems = JSON.parse(lsItems) || [];
-  // const startingIndex = previousSearchItems.length - 3;
+  //makes maximum amount of actors to dispaly 3
   const maxThree = previousSearchItems.slice(-3);
-  maxThree.forEach(item => {
+  //creates buttons within span in relation to items in local storage
+  maxThree.forEach((item) => {
     const button = document.createElement("span");
     button.textContent = item;
     button.classList.add("button", "is-link", "mx-2");
     historyEl.appendChild(button);
   });
-};
-
-
+}
 
 // todo: set local storage
 function setLocalStorage() {
@@ -198,34 +162,18 @@ function setLocalStorage() {
   localStorage.setItem(`storage[${enumeratorValue}]`, localStorageTxtValue);
   enumeratorValue++;
 }
-
+//creates element to house buttons of previous searches
 var historyEl = document.getElementById("history");
 
-// todo: finish this method
-function getLocalStorage() {
-  console.log("getLocalStorage()");
-  var conditionalValue = enumeratorValue;
-  for (var i = 0; i < conditionalValue; i++) {
-    globalStorageTxt[i] = localStorage.getItem(`storage[${i}]`);
-    globalStorageEl[i].textContent = globalStorageTxt[i];
-    globalStorageEl[i].classList.add("button", "is-link", "mx-2");
-    historyEl.appendChild(globalStorageEl[i]);
-    console.log("test: ", globalStorageEl[i]);
-    console.log("Text: ", globalStorageTxt);
-  }
-}
-
-
-
+//destroys original bulma caraousel
 function destroyCarousel() {
   var carousels = bulmaCarousel.attach("#carousel-demo", {
     slidesToScroll: 1,
     slidesToShow: 1,
   });
   console.log("CAROUSELS", carousels[0]);
-  // carousels[0].destroy();
 }
-
+//creates new carasoul
 function initCarousel(id) {
   var carouselId = id || "carousel-demo";
   console.log("INIT CAROUSEL", carouselId);
@@ -236,13 +184,13 @@ function initCarousel(id) {
 }
 
 function attachEventListeners() {
-  historyEl.addEventListener("click", async function(event) {
+  historyEl.addEventListener("click", async function (event) {
     const element = event.target;
-    if (element.matches('span')) {
+    if (element.matches("span")) {
       const searchText = element.textContent;
       await fetchActorMovies(searchText);
     }
-  })
+  });
 }
 
 // todo: call functions
@@ -256,6 +204,7 @@ window.addEventListener("load", function () {
   attachEventListeners();
 });
 
+//creates new carasoul from deestroyed one with appropraite id
 var populateCard = function (moviesStreamCardData, actor) {
   console.log("Populate Card", moviesStreamCardData);
   // destroyCarousel();
@@ -265,6 +214,7 @@ var populateCard = function (moviesStreamCardData, actor) {
   $(".carousel-container").empty().append(elNewCarousel);
   $("#carousel-demo").remove();
 
+  //Creates loop to get all relevant information from moviestreamcardobject to populate template literal
   for (i = 0; i < moviesStreamCardData.length; i++) {
     var movieTitle = moviesStreamCardData[i].title;
     var movieOverview = moviesStreamCardData[i].overview;
