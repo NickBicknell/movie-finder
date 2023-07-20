@@ -1,6 +1,7 @@
 // todo: set the api keys to variables
 var apiKey = "e7c2031dffmsha123315849343c2p1ba5fdjsn2ad30982319f";
 // sets global letiables
+var previousSearchItems = [];
 var enumeratorValue = 0;
 var globalResponse = [];
 var globalInputVal = [];
@@ -106,6 +107,8 @@ var fetchStreamingServicesBatch = function (titleSearch) {
 };
 
 // todo: set event listeners
+
+
 async function initSearch(searchEvent) {
   console.log("initSearch()");
   searchEvent.preventDefault();
@@ -128,8 +131,59 @@ async function initSearch(searchEvent) {
     alert("!searchString");
   }
   // then, set the local storage
-  setLocalStorage();
+  // debugger;
+  // setLocalStorage();
+  // getLocalStorage();
+  previousSearchItems.push(searchString);
+  setLocalItems(previousSearchItems);
+  getLocalItems();
 }
+
+
+function setLocalItems(items) {
+  localStorage.setItem("previousSearches", JSON.stringify(items));
+};
+
+// function setLocalItems(items) {
+//   localStorage.setItem("previousSearches", JSON.stringify(items));
+// };
+
+// function getLocalItems() {
+//   historyEl.innerHTML = '';
+//   const lsItems = localStorage.getItem("previousSearches");
+//   if (localStorage.getItem("previousSearches")) {
+//     console.log("This search is in local storage")
+//     previousSearchItems = JSON.parse(lsItems) || [];
+//     // const startingIndex = previousSearchItems.length - 3;
+//     const maxThree = previousSearchItems.slice(-3);
+//     maxThree.forEach(item => {
+//       const button = document.createElement("span");
+//       button.textContent = item;
+//       button.classList.add("button", "is-link", "mx-2");
+//       historyEl.appendChild(button);
+//     });
+//   } else {
+//     console.log("This search is not in local storage")
+  
+//   }
+  
+// };
+
+function getLocalItems() {
+  historyEl.innerHTML = '';
+  const lsItems = localStorage.getItem("previousSearches");
+  previousSearchItems = JSON.parse(lsItems) || [];
+  // const startingIndex = previousSearchItems.length - 3;
+  const maxThree = previousSearchItems.slice(-3);
+  maxThree.forEach(item => {
+    const button = document.createElement("span");
+    button.textContent = item;
+    button.classList.add("button", "is-link", "mx-2");
+    historyEl.appendChild(button);
+  });
+};
+
+
 
 // todo: set local storage
 function setLocalStorage() {
@@ -141,20 +195,27 @@ function setLocalStorage() {
   var localStorageTxtValue = JSON.stringify(globalInputVal[enumeratorValue]);
   console.log("localStorageTxtValue:", localStorageTxtValue);
   // sets the value from above into local storage
-  localStorage.setItem(globalStorageEl, localStorageTxtValue);
+  localStorage.setItem(`storage[${enumeratorValue}]`, localStorageTxtValue);
   enumeratorValue++;
 }
+
+var historyEl = document.getElementById("history");
 
 // todo: finish this method
 function getLocalStorage() {
   console.log("getLocalStorage()");
-  var conditionalValue = globalStorageEl.length;
-  debugger;
+  var conditionalValue = enumeratorValue;
   for (var i = 0; i < conditionalValue; i++) {
-    globalStorageTxt[i] = localStorage.getItem(i);
+    globalStorageTxt[i] = localStorage.getItem(`storage[${i}]`);
     globalStorageEl[i].textContent = globalStorageTxt[i];
+    globalStorageEl[i].classList.add("button", "is-link", "mx-2");
+    historyEl.appendChild(globalStorageEl[i]);
+    console.log("test: ", globalStorageEl[i]);
+    console.log("Text: ", globalStorageTxt);
   }
 }
+
+
 
 function destroyCarousel() {
   var carousels = bulmaCarousel.attach("#carousel-demo", {
@@ -174,12 +235,25 @@ function initCarousel(id) {
   });
 }
 
+function attachEventListeners() {
+  historyEl.addEventListener("click", async function(event) {
+    const element = event.target;
+    if (element.matches('span')) {
+      const searchText = element.textContent;
+      await fetchActorMovies(searchText);
+    }
+  })
+}
+
 // todo: call functions
 window.addEventListener("load", function () {
   // todo: call functions inside lambda function
   formEl.addEventListener("submit", initSearch);
   // adds the carousel to the DOM
   initCarousel();
+  // getLocalStorage();
+  getLocalItems();
+  attachEventListeners();
 });
 
 var populateCard = function (moviesStreamCardData, actor) {
