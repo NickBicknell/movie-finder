@@ -132,7 +132,12 @@ async function initSearch(searchEvent) {
 //function to save items in local storage in string array
 function setLocalItems(items) {
   localStorage.setItem("previousSearches", JSON.stringify(items));
+
 }
+
+
+
+
 
 function getLocalItems() {
   historyEl.innerHTML = "";
