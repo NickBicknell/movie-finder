@@ -144,30 +144,6 @@ function setLocalItems(items) {
   localStorage.setItem("previousSearches", JSON.stringify(items));
 };
 
-// function setLocalItems(items) {
-//   localStorage.setItem("previousSearches", JSON.stringify(items));
-// };
-
-// function getLocalItems() {
-//   historyEl.innerHTML = '';
-//   const lsItems = localStorage.getItem("previousSearches");
-//   if (localStorage.getItem("previousSearches")) {
-//     console.log("This search is in local storage")
-//     previousSearchItems = JSON.parse(lsItems) || [];
-//     // const startingIndex = previousSearchItems.length - 3;
-//     const maxThree = previousSearchItems.slice(-3);
-//     maxThree.forEach(item => {
-//       const button = document.createElement("span");
-//       button.textContent = item;
-//       button.classList.add("button", "is-link", "mx-2");
-//       historyEl.appendChild(button);
-//     });
-//   } else {
-//     console.log("This search is not in local storage")
-  
-//   }
-  
-// };
 
 function getLocalItems() {
   historyEl.innerHTML = '';
